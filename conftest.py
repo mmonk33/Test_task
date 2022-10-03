@@ -9,9 +9,7 @@ def browser():
             "platformVersion": "9",
             "udid": "emulator-5554",
             "appPackage": "com.wildberries.ru",
-            "appActivity": "ru.wildberries.SplashActivity",
-            # "unicodeKeyboard": "true",
-            # "resetKeyboard": "true"
+            "appActivity": "ru.wildberries.SplashActivity"
     }
     driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_capabilities=capability)
     yield driver

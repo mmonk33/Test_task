@@ -1,4 +1,4 @@
-from Base import Actions
+from Base import Actions, Locators
 
 
 class MainPage(Actions):
@@ -13,3 +13,19 @@ class MainPage(Actions):
 
     def enter_text(self, locator, text):
         return self.find_element(locator).send_keys(text)
+
+    def sort_by(self, By):
+        self.click_element(Locators.SORT_BUTTON)
+        if By is 'popularity':
+            self.click_element(Locators.POPULARITY)
+        elif By is 'rating':
+            self.click_element(Locators.RATING)
+        elif By is 'price_min':
+            self.click_element(Locators.PRICE_MIN)
+        elif By is 'price_max':
+            self.click_element(Locators.PRICE_MAX)
+        elif By is 'update':
+            self.click_element(Locators.UPDATE)
+        elif By is 'discount':
+            self.click_element(Locators.DISC)
+

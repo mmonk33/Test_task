@@ -1,7 +1,7 @@
 from appium.webdriver.common.appiumby import AppiumBy
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 
 
 class Locators:
@@ -20,14 +20,28 @@ class Locators:
     RUSSIA_SELECTOR = (AppiumBy.XPATH, "//*[@class='android.widget.TextView' and (contains(@text, 'Россия'))]")
     SWIPE = (AppiumBy.ID, 'com.wildberries.ru:id/mainContentRoot')
     SKIP_BUTTON = (AppiumBy.XPATH, "//*[@class='android.widget.Button']")
+    SORT_BUTTON = (AppiumBy.ID, 'com.wildberries.ru:id/sortButton')
+    POPULARITY = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "популярн"))]')
+    RATING = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "рейтинг"))]')
+    PRICE_MIN = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "min"))]')
+    PRICE_MAX = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "max"))]')
+    UPDATE = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "обнов"))]')
+    DISC = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "скидк"))]')
+    DISC_TEXT = (AppiumBy.ID, 'com.wildberries.ru:id/textDiscount')
+    PRICE_TEXT = (AppiumBy.ID, 'com.wildberries.ru:id/textBottomPrice')
+    RATING_TEXT = (AppiumBy.ID, 'com.wildberries.ru:id/rating')
 
 
 class Actions:
     def __init__(self, driver):
         self.driver = driver
 
-    def find_element(self, locator, timer=5):
-        return WebDriverWait(self.driver, timer).until(EC.presence_of_element_located(locator),
+    def find_element(self, locator, timer=10):
+        return WebDriverWait(self.driver, timer).until(EC.element_to_be_clickable(locator),
+                                                       message=f"Can't find element by locator {locator}")
+
+    def find_elements(self, locator, timer=10):
+        return WebDriverWait(self.driver, timer).until(EC.presence_of_all_elements_located(locator),
                                                        message=f"Can't find element by locator {locator}")
 
     def swipe_element(self, direction, locator):
@@ -55,3 +69,17 @@ class Actions:
             return False
         else:
             return True
+
+    def get_item_param(self, locator):
+        items = self.find_elements(locator)
+        values = []
+        for item in items:
+            values.append(item.text)
+        return values
+
+    @staticmethod
+    def check_sort(array, trend):
+        if trend is 'ascending':
+            return all([x < y for x, y in zip(array, array[1:])])
+        elif trend is 'descending':
+            return all([x > y for x, y in zip(array, array[1:])])
