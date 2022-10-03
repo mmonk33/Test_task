@@ -1,5 +1,4 @@
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -11,7 +10,8 @@ class Locators:
     SEARCH = (AppiumBy.ID, 'com.wildberries.ru:id/search_searchEditText')
     FILTER = (AppiumBy.ID, 'com.wildberries.ru:id/filterButton')
     CATEGORY = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "Категория"))]')
-    SEARCH_A = (AppiumBy.XPATH, "//*[@class='android.widget.EditText' and not (contains(@resource-id, 'com.wildberries.ru:id/search_searchEditText'))]")
+    SEARCH_A = (AppiumBy.XPATH, "//*[@class='android.widget.EditText' and not (contains(@resource-id, "
+                                "'com.wildberries.ru:id/search_searchEditText'))]")
     FILTER_AREA = (AppiumBy.ID, 'com.wildberries.ru:id/rvFilters')
     POLO = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvFilterValue" and (contains(@text, "поло"))]')
     TOOLBAR_TITLE = (AppiumBy.ID, 'com.wildberries.ru:id/toolbarTitle')

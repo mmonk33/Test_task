@@ -6,7 +6,7 @@ from appium import webdriver
 def browser():
     capability = {
             "platformName": "Android",
-            "platformVersion": "9",
+            "platformVersion": "11",
             "udid": "emulator-5554",
             "appPackage": "com.wildberries.ru",
             "appActivity": "ru.wildberries.SplashActivity"
