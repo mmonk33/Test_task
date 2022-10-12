@@ -1,4 +1,3 @@
-# Simbirsoft_test_task
 ## Emulated device:
 Pixel 2 API 30
 Android 11.0 Google PLay | x86
