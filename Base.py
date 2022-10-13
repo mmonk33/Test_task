@@ -3,39 +3,19 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-class Locators:
-    MAIN_LIST = (AppiumBy.ID, 'com.wildberries.ru:id/swipeRefresh')
-    MAIN_BANNER = (AppiumBy.ID, 'com.wildberries.ru:id/carousel')
+class BaseLocators:
     TAB_BAR_CATALOGUE = (AppiumBy.ID, 'com.wildberries.ru:id/btnCatalogue')
-    SEARCH = (AppiumBy.ID, 'com.wildberries.ru:id/search_searchEditText')
-    FILTER = (AppiumBy.ID, 'com.wildberries.ru:id/filterButton')
-    CATEGORY = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "Категория"))]')
-    SEARCH_A = (AppiumBy.XPATH, "//*[@class='android.widget.EditText' and not (contains(@resource-id, "
-                                "'com.wildberries.ru:id/search_searchEditText'))]")
-    FILTER_AREA = (AppiumBy.ID, 'com.wildberries.ru:id/rvFilters')
-    POLO = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvFilterValue" and (contains(@text, "поло"))]')
-    TOOLBAR_TITLE = (AppiumBy.ID, 'com.wildberries.ru:id/toolbarTitle')
     TAB_BAR_MAIN = (AppiumBy.ID, 'com.wildberries.ru:id/btnMain')
-    CAROUSEL_TEXT = (AppiumBy.XPATH, "//*[@class='android.widget.TextView'][2]")
     RUSSIA_SELECTOR = (AppiumBy.XPATH, "//*[@class='android.widget.TextView' and (contains(@text, 'Россия'))]")
-    SWIPE = (AppiumBy.ID, 'com.wildberries.ru:id/mainContentRoot')
     SKIP_BUTTON = (AppiumBy.XPATH, "//*[@class='android.widget.Button']")
-    SORT_BUTTON = (AppiumBy.ID, 'com.wildberries.ru:id/sortButton')
-    POPULARITY = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "популярн"))]')
-    RATING = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "рейтинг"))]')
-    PRICE_MIN = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "min"))]')
-    PRICE_MAX = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "max"))]')
-    UPDATE = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "обнов"))]')
-    DISC = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "скидк"))]')
-    CATALOGUE = (AppiumBy.ID, 'com.wildberries.ru:id/recyclerCatalog')
-    DISC_TEXT = (AppiumBy.ID, 'com.wildberries.ru:id/textDiscount')
-    PRICE_TEXT = (AppiumBy.ID, 'com.wildberries.ru:id/textBottomPrice')
-    RATING_TEXT = (AppiumBy.ID, 'com.wildberries.ru:id/rating')
 
 
 class Actions:
     def __init__(self, driver):
         self.driver = driver
+
+    def click_element(self, locator):
+        self.find_element(locator).click()
 
     def find_element(self, locator, timer=10):
         return WebDriverWait(self.driver, timer).until(EC.element_to_be_clickable(locator),

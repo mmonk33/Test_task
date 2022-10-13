@@ -1,8 +1,6 @@
 import pytest
 from appium import webdriver
-
-from Base import Locators
-from Main import MainPage
+from Base import BaseLocators, Actions
 
 
 @pytest.fixture(scope='session')
@@ -21,7 +19,7 @@ def browser():
 
 @pytest.fixture(scope='session')
 def setup(browser):
-    page = MainPage(browser)
-    page.click_element(Locators.RUSSIA_SELECTOR)
-    page.click_element(Locators.SKIP_BUTTON)
-    yield page
+    region_select_page = Actions(browser)
+    region_select_page.click_element(BaseLocators.RUSSIA_SELECTOR)
+    region_select_page.click_element(BaseLocators.SKIP_BUTTON)
+    yield browser
