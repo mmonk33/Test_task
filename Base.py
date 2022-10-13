@@ -27,6 +27,7 @@ class Locators:
     PRICE_MAX = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "max"))]')
     UPDATE = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "обнов"))]')
     DISC = (AppiumBy.XPATH, '//*[@resource-id="com.wildberries.ru:id/tvTitle" and (contains(@text, "скидк"))]')
+    CATALOGUE = (AppiumBy.ID, 'com.wildberries.ru:id/recyclerCatalog')
     DISC_TEXT = (AppiumBy.ID, 'com.wildberries.ru:id/textDiscount')
     PRICE_TEXT = (AppiumBy.ID, 'com.wildberries.ru:id/textBottomPrice')
     RATING_TEXT = (AppiumBy.ID, 'com.wildberries.ru:id/rating')
@@ -80,6 +81,6 @@ class Actions:
     @staticmethod
     def check_sort(array, trend):
         if trend is 'ascending':
-            return all([x < y for x, y in zip(array, array[1:])])
+            assert all([x <= y for x, y in zip(array, array[1:])]), 'INCORRECT SORTING'
         elif trend is 'descending':
-            return all([x > y for x, y in zip(array, array[1:])])
+            assert all([x >= y for x, y in zip(array, array[1:])]), 'INCORRECT SORTING'
