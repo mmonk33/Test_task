@@ -1,6 +1,6 @@
 import pytest
 from appium import webdriver
-from Base import BaseLocators, Actions
+from pages.Base import BaseLocators, Actions
 
 
 @pytest.fixture(scope='session')
@@ -9,6 +9,7 @@ def browser():
             "platformName": "Android",
             "platformVersion": "11",
             "udid": "emulator-5554",
+            "app": "/home/mmonk3/PycharmProjects/Simbirsoft_test_task/Wildberries_4.8.3000.apk",
             "appPackage": "com.wildberries.ru",
             "appActivity": "ru.wildberries.SplashActivity"
     }
