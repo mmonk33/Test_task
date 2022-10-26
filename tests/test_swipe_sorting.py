@@ -23,4 +23,3 @@ def test_sorting(setup):
     main_page.swipe_element('up', main_page.Locators.CATALOGUE)
     items = main_page.get_item_param(main_page.Locators.PRICE_TEXT)
     main_page.check_sort(items, 'ascending')
-
