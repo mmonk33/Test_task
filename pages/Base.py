@@ -11,21 +11,21 @@ class BaseLocators:
 
 
 class Actions:
-    def __init__(self, driver):
+    def __init__(self, driver) -> None:
         self.driver = driver
 
-    def click_element(self, locator):
+    def click_element(self, locator: tuple) -> None:
         self.find_element(locator).click()
 
-    def find_element(self, locator, timer=10):
+    def find_element(self, locator: tuple, timer=10):
         return WebDriverWait(self.driver, timer).until(EC.element_to_be_clickable(locator),
                                                        message=f"Can't find element by locator {locator}")
 
-    def find_elements(self, locator, timer=10):
+    def find_elements(self, locator: tuple, timer=10) -> list:
         return WebDriverWait(self.driver, timer).until(EC.presence_of_all_elements_located(locator),
                                                        message=f"Can't find element by locator {locator}")
 
-    def swipe_element(self, direction, locator):
+    def swipe_element(self, direction, locator: tuple) -> None:
         element = self.find_element(locator)
         left_x = int(element.location['x']) + 10
         right_x = int(element.size['width']) - 10
@@ -44,14 +44,14 @@ class Actions:
         else:
             print('Unknown direction')
 
-    def is_present(self, locator):
+    def is_present(self, locator: tuple) -> bool:
         element = self.driver.find_elements(locator)
         if len(element) == 0:
             return False
         else:
             return True
 
-    def get_item_param(self, locator):
+    def get_item_param(self, locator: tuple) -> list:
         items = self.find_elements(locator)
         values = []
         for item in items:
